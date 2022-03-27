@@ -1,8 +1,9 @@
 {
   "name": "eztv-crawler",
   "description": "A promised based node module to scrape TV shows, episodes and torrent info from EZTV.",
+  "homepage": "https://github.com/codeit-ninja/eztv-crawler",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "scripts": {
