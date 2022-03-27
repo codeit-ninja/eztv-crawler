@@ -14,13 +14,13 @@ import { getShows } from 'eztv-scraper'
 const shows = await getShows();
 ```
 Response
-```json
+```javascript
 [
     {
         "id": 271007,
         "title": "$50K Three Ways"
     }
-    ...
+    // ...
 ]
 ```
 #### getShow
@@ -32,7 +32,7 @@ const show = await getShow(481);   // By ID (481 = Game of Thrones)
 //const show = await getShow('Game of thrones'); // or by name
 ```
 Response
-```json
+```javascript
 {
     "title": "Game of Thrones",
     "summary": "Based on the bestselling book series A Song of Ice and Fire by George R.R. Martin, this sprawling new HBO drama is set in a world where summers span decades and winters can last a lifetime. From the scheming south and the savage eastern lands, to the frozen north and ancient Wall that protects the realm from the mysterious darkness beyond, the powerful families of the Seven Kingdoms are locked in a battle for the Iron Throne. This is a story of duplicity and treachery, nobility and honor, conquest and triumph. In the Game of Thrones, you either win or you die.",
@@ -48,7 +48,7 @@ Response
             "released": "1 year",
             "seeds": 0
         }
-        ...
+        // ...
 }
 ```
 
@@ -60,7 +60,7 @@ import { search } from 'eztv-scraper'
 const result = await search('game of thrones s01e01');
 ```
 Response
-```json
+```javascript
 [
     {
         "showLink": "/shows/481/game-of-thrones/",
@@ -71,6 +71,6 @@ Response
         "released": "1 year",
         "seeds": 3
     }
-    ...
+    // ...
 ]
 ```
