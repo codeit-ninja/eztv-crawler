@@ -19,26 +19,6 @@ Response
     {
         "id": 271007,
         "title": "$50K Three Ways"
-    },
-    {
-        "id": 449,
-        "title": "10 O'Clock Live"
-    },
-    {
-        "id": 189264,
-        "title": "10 Puppies and Us"
-    },
-    {
-        "id": 37568,
-        "title": "10 Steps to Murder"
-    },
-    {
-        "id": 308,
-        "title": "10 Things I Hate About You"
-    },
-    {
-        "id": 74949,
-        "title": "10 Years with Hayao Miyazaki"
     }
     ...
 ]
@@ -67,25 +47,30 @@ Response
             "size": 10383083438,    // bytes
             "released": "1 year",
             "seeds": 0
-        },
-        {
-            "showLink": "https://www.tvmaze.com/episodes/4960/game-of-thrones-1x09-baelor",
-            "title": "Game of Thrones S01E09 2160p UHD BluRay x265-SCOTLUHD [eztv]",
-            "magnet": "magnet:?xt=urn:btih:994ff5674bda5582d4e802dbd320aebf2c2d0642&dn=Game.of.Thrones.S01E09.2160p.UHD.BluRay.x265-SCOTLUHD%5Beztv.io%5D.mkv%5Beztv%5D&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A80&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969",
-            "torrent": "https://zoink.ch/torrent/Game.of.Thrones.S01E09.2160p.UHD.BluRay.x265-SCOTLUHD[eztv.io].mkv.torrent",
-            "size": 11252814315,
-            "released": "1 year",
-            "seeds": 0
-        },
-        {
-            "showLink": "https://www.tvmaze.com/episodes/4959/game-of-thrones-1x08-the-pointy-end",
-            "title": "Game of Thrones S01E08 2160p UHD BluRay x265-SCOTLUHD [eztv]",
-            "magnet": "magnet:?xt=urn:btih:768711c6ab0ed6a22ee4f09e6fadbed1a55e2858&dn=Game.of.Thrones.S01E08.2160p.UHD.BluRay.x265-SCOTLUHD%5Beztv.io%5D.mkv%5Beztv%5D&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A80&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969",
-            "torrent": "https://zoink.ch/torrent/Game.of.Thrones.S01E08.2160p.UHD.BluRay.x265-SCOTLUHD[eztv.io].mkv.torrent",
-            "size": 15171971973,
-            "released": "1 year",
-            "seeds": 1
         }
         ...
 }
+```
+
+#### search
+Usage
+```typescript
+import { search } from 'eztv-scraper'
+
+const result = await search('game of thrones s01e01');
+```
+Response
+```json
+[
+    {
+        "showLink": "/shows/481/game-of-thrones/",
+        "title": "Game of Thrones S01E01 2160p UHD BluRay x265-SCOTLUHD [eztv]",
+        "magnet": "magnet:?xt=urn:btih:e4aae367b822794d37d8cafd5a628db985d65fb4&dn=Game.of.Thrones.S01E01.2160p.UHD.BluRay.x265-SCOTLUHD%5Beztv.io%5D.mkv%5Beztv.re%5D&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A80&tr=udp%3A%2F%2Fglotorrents.pw%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Fexodus.desync.com%3A6969",
+        "torrent": "https://zoink.ch/torrent/Game.of.Thrones.S01E01.2160p.UHD.BluRay.x265-SCOTLUHD[eztv.io].mkv.torrent",
+        "size": 12605729013,
+        "released": "1 year",
+        "seeds": 3
+    }
+    ...
+]
 ```

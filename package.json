@@ -1,6 +1,6 @@
 {
   "name": "eztv-crawler",
-  "description": "Because the EZTV API is rather bad, you obtain more info using this crawler instead.",
+  "description": "A promised based node module to scrape TV shows, episodes and torrent info from EZTV.",
   "private": false,
   "version": "1.0.0",
   "scripts": {
