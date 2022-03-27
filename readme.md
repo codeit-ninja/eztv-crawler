@@ -1,10 +1,10 @@
-### EZTV API - for NodeJS
+# EZTV API - for NodeJS
 
 A promised based node module to scrape TV shows, episodes and torrent info from EZTV.
 
 Module was created because popular existing modules dont support TypeScript, are overkill and EZTV's official API sucks.
 
-## Examples
+### Examples
 
 #### getShows
 Usage
