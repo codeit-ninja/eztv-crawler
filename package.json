@@ -2,7 +2,7 @@
   "name": "eztv-crawler",
   "description": "A promised based node module to scrape TV shows, episodes and torrent info from EZTV.",
   "private": false,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/main.js",
   "types": "./dist/main.d.ts",
   "scripts": {
