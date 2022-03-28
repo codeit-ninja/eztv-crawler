@@ -80,7 +80,9 @@ export async function getShow(show: number|string): Promise<ShowType> {
         const shows = await getShows();
         const findShow = shows.find(s => s.title.toLowerCase() === show.toLowerCase());
 
-        if (!findShow) throw new EztvCrawlerException(`Did not find a show with name ${show}`)
+        if (!findShow) {
+            throw new EztvCrawlerException(`Did not find a show with name ${show}`)
+        }
         
         return getShow(findShow.id);
     }
@@ -88,8 +90,7 @@ export async function getShow(show: number|string): Promise<ShowType> {
     const { $ } = await crawl(`https://eztv.wf/shows/${show}/`);
     const episodes = $('[name="hover"]').toArray();
     const imdbIdRegex = $('[itemprop="aggregateRating"] a').attr('href')?.match(/tt\d+/);
-
-    return {
+    const result = {
         title: $('.section_post_header [itemprop="name"]').text(),
         summary: $('[itemprop="description"] p').text(),
         description: $('span[itemprop="description"] + br + br + hr + br + span').text(),
@@ -98,6 +99,12 @@ export async function getShow(show: number|string): Promise<ShowType> {
             return transformToEpisode($, episode);
         })
     }
+
+    if (!result || !result.title || result.title === '') {
+        throw new EztvCrawlerException(`Did not find a show with name ${show}`)
+    }
+
+    return result;
 }
 
 /**

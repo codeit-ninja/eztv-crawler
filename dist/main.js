@@ -77,14 +77,15 @@ function getShow(show) {
         if (typeof show === 'string') {
             const shows = yield getShows();
             const findShow = shows.find(s => s.title.toLowerCase() === show.toLowerCase());
-            if (!findShow)
+            if (!findShow) {
                 throw new EztvCrawlerException(`Did not find a show with name ${show}`);
+            }
             return getShow(findShow.id);
         }
         const { $ } = yield crawl(`https://eztv.wf/shows/${show}/`);
         const episodes = $('[name="hover"]').toArray();
         const imdbIdRegex = (_a = $('[itemprop="aggregateRating"] a').attr('href')) === null || _a === void 0 ? void 0 : _a.match(/tt\d+/);
-        return {
+        const result = {
             title: $('.section_post_header [itemprop="name"]').text(),
             summary: $('[itemprop="description"] p').text(),
             description: $('span[itemprop="description"] + br + br + hr + br + span').text(),
@@ -93,6 +94,10 @@ function getShow(show) {
                 return transformToEpisode($, episode);
             })
         };
+        if (!result || !result.title || result.title === '') {
+            throw new EztvCrawlerException(`Did not find a show with name ${show}`);
+        }
+        return result;
     });
 }
 exports.getShow = getShow;
