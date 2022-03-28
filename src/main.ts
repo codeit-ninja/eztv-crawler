@@ -1,5 +1,6 @@
-import Crawler from "crawler";
 import bytes from "bytes";
+import fetch from "cross-fetch";
+import { load, CheerioAPI, Element } from 'cheerio';
 
 export type EpisodeType = {
     showLink: string | undefined;
@@ -26,22 +27,11 @@ export type ShowType = {
  * @param url 
  * @returns `Crawler.CrawlerRequestResponse`
  */
-export function crawl(url: string): Promise<Crawler.CrawlerRequestResponse> {
-    return new Promise(resolve => {
-        new Crawler({
-            maxConnections: 5,
-            retries: 2,
-            callback(error, res, done) {
-                if(error) {
-                    throw new EztvCrawlerException(error.message, error);
-                }
-        
-                done();
-                resolve(res);
-            }
-        })
-        .queue(url);
-    });
+export async function crawl(url: string) {
+    const body = await fetch(url).then(async resp => resp.text());
+    const $ = load(body);
+
+    return { body, $ };
 }
 
 /**
@@ -131,7 +121,7 @@ export async function search(query: string) {
  * @param episode   - cheerio.Element
  * @returns `episodeObject`
  */
-function transformToEpisode($: cheerio.CheerioAPI, episode: cheerio.Element) {
+function transformToEpisode($: CheerioAPI, episode: Element) {
     return {
         showLink: $(episode).find('td:nth-child(1) a').attr('href'),
         title: $(episode).find('td:nth-child(2)').text()?.replaceAll(/\n/g, ''),
