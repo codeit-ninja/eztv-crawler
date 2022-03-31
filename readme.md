@@ -9,9 +9,15 @@ The official API is also implemented incase you want to use that. The *functions
 
 Module was created because popular existing modules dont support TypeScript, are overkill and EZTV's official API is not that great, this package gives you more freedom.
 
-### 🔥Examples
+## ⚒ Installation
 
-#### 🚩 getShows
+```
+npm install eztv-crawler
+```
+
+## 🔥Examples
+
+### 🚩 getShows
 Usage
 ```typescript
 import { getShows } from 'eztv-scraper'
@@ -28,7 +34,7 @@ Response
     // ...
 ]
 ```
-#### 🚩 getShow
+### 🚩 getShow
 Usage
 ```typescript
 import { getShow } from 'eztv-scraper'
@@ -57,7 +63,7 @@ Response
 }
 ```
 
-#### 🚩 search
+### 🚩 search
 Usage
 ```typescript
 import { search } from 'eztv-scraper'
@@ -79,7 +85,7 @@ Response
     // ...
 ]
 ```
-#### 🚩 getTorrents (API)
+### 🚩 getTorrents (API)
 Usage
 ```typescript
 import { getTorrents } from 'eztv-scraper'
@@ -115,7 +121,7 @@ Response
     ]
 }
 ```
-#### 🚩 getTorrentsByImdbId (API)
+### 🚩 getTorrentsByImdbId (API)
 Usage
 ```typescript
 import { getTorrents } from 'eztv-scraper'
