@@ -1,3 +1,3 @@
-import { search } from './main'
+import { getTorrents, getTorrentsByImdbId } from './main'
 
-search('sherlock s01e01').then(shows => console.log(shows));
+getTorrents(10, 5).then(result => console.log(result.page));

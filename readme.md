@@ -1,12 +1,17 @@
-# EZTV API - for NodeJS
+# 🌵 EZTV API AND SCRAPER - for NodeJS
 
 A promised based node module to scrape TV shows, episodes and torrent info from EZTV.
 
-Module was created because popular existing modules dont support TypeScript, are overkill and EZTV's official API sucks.
+The official API is also implemented incase you want to use that. The *functions* for the official API are listed below.
 
-### Examples
+- `getTorrentsByImdbId`
+- `getTorrents`
 
-#### getShows
+Module was created because popular existing modules dont support TypeScript, are overkill and EZTV's official API is not that great, this package gives you more freedom.
+
+### 🔥Examples
+
+#### 🚩 getShows
 Usage
 ```typescript
 import { getShows } from 'eztv-scraper'
@@ -23,7 +28,7 @@ Response
     // ...
 ]
 ```
-#### getShow
+#### 🚩 getShow
 Usage
 ```typescript
 import { getShow } from 'eztv-scraper'
@@ -52,7 +57,7 @@ Response
 }
 ```
 
-#### search
+#### 🚩 search
 Usage
 ```typescript
 import { search } from 'eztv-scraper'
@@ -73,4 +78,77 @@ Response
     }
     // ...
 ]
+```
+#### 🚩 getTorrents (API)
+Usage
+```typescript
+import { getTorrents } from 'eztv-scraper'
+
+const result = await getTorrents();
+```
+Response
+```javascript
+{
+    "torrents_count": 551028,
+    "limit": 30,
+    "page": 5,
+    "torrents": [
+        {
+            "id": 1775044,
+            "hash": "70ab3fe6c670992bca7781f996b740f2863aae5e",
+            "filename": "Super.PupZ.S01.WEBRip.x265-ION265[eztv.re]",
+            "episode_url": "https://eztv.wf/ep/1775044/super-pupz-s01-webrip-x265-ion265/",
+            "torrent_url": "https://zoink.ch/torrent/Super.PupZ.S01.WEBRip.x265-ION265[eztv.re].torrent",
+            "magnet_url": "magnet:?xt=urn:btih:70ab3fe6c670992bca7781f996b740f2863aae5e&dn=Super.PupZ.S01.WEBRip.x265-ION265%5Beztv%5D&tr=udp://tracker.coppersurfer.tk:80&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.leechers-paradise.org:6969&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://exodus.desync.com:6969",
+            "title": "Super PupZ S01 WEBRip x265-ION265 EZTV",
+            "imdb_id": "18469966",
+            "season": "1",
+            "episode": "0",
+            "small_screenshot": "//ezimg.ch/thumbs/super-pupz-s01-webrip-x265-ion265-small.jpg",
+            "large_screenshot": "//ezimg.ch/thumbs/super-pupz-s01-webrip-x265-ion265-large.jpg",
+            "seeds": 19,
+            "peers": 11,
+            "date_released_unix": 1648732077,
+            "size_bytes": "1819639174"
+        },
+        // ...
+    ]
+}
+```
+#### 🚩 getTorrentsByImdbId (API)
+Usage
+```typescript
+import { getTorrents } from 'eztv-scraper'
+
+const result = await getTorrentsByImdbId('tt6048596');
+```
+Response
+```javascript
+{
+    "imdb_id": "6048596",   // if not match found this property wont return with the result
+    "torrents_count": 129,
+    "limit": 30,
+    "page": 1,
+    "torrents": [
+        {
+            "id": 1727876,
+            "hash": "f6b983c6dc14fccd0741790cc3fb51fbf5d8c932",
+            "filename": "The.Sinner.S04E08.1080p.HEVC.x265-MeGusta[eztv.re].mkv",
+            "episode_url": "https://eztv.wf/ep/1727876/the-sinner-s04e08-1080p-hevc-x265-megusta/",
+            "torrent_url": "https://zoink.ch/torrent/The.Sinner.S04E08.1080p.HEVC.x265-MeGusta[eztv.re].mkv.torrent",
+            "magnet_url": "magnet:?xt=urn:btih:f6b983c6dc14fccd0741790cc3fb51fbf5d8c932&dn=The.Sinner.S04E08.1080p.HEVC.x265-MeGusta%5Beztv%5D&tr=udp://tracker.coppersurfer.tk:80&tr=udp://glotorrents.pw:6969/announce&tr=udp://tracker.leechers-paradise.org:6969&tr=udp://tracker.opentrackr.org:1337/announce&tr=udp://exodus.desync.com:6969",
+            "title": "The Sinner S04E08 1080p HEVC x265-MeGusta EZTV",
+            "imdb_id": "6048596",
+            "season": "4",
+            "episode": "8",
+            "small_screenshot": "//ezimg.ch/thumbs/the-sinner-s04e08-1080p-hevc-x265-megusta-small.jpg",
+            "large_screenshot": "//ezimg.ch/thumbs/the-sinner-s04e08-1080p-hevc-x265-megusta-large.jpg",
+            "seeds": 3,
+            "peers": 0,
+            "date_released_unix": 1638452270,
+            "size_bytes": "479545240"
+        },
+        // ...
+    ]
+}
 ```

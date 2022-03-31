@@ -20,6 +20,33 @@ export type ShowType = {
     episodes: EpisodeType[];
 }
 
+export type ImdbEpisodeType = {
+    id: number;
+    hash: string;
+    filename: string;
+    episode_url: string;
+    torrent_url: string;
+    magnet_url: string;
+    title: string;
+    imdb_id: string;
+    season: string;
+    episode: string;
+    small_screenshot: string;
+    large_screenshot: string;
+    seeds: number;
+    peers: number;
+    date_released_unix: number;
+    size_bytes: string;
+}
+
+export type ApiResponseType = {
+    imdb_id?: string;
+    torrents_count: number;
+    limit: number;
+    page: number;
+    torrents: ImdbEpisodeType[];
+}
+
 /**
  * Crawl any given url
  * 
@@ -113,6 +140,56 @@ export async function search(query: string) {
 }
 
 /**
+ * Get a list of torrents
+ * 
+ * @param limit 
+ * @param page 
+ * @param apiBaseUrl        - If eztv domain changed or eztv is blocked in your country provide a proxy url here
+ * @returns `ApiResponseType`
+ */
+export async function getTorrents(limit = 10, page = 1, apiBaseUrl = 'https://eztv.wf/api/') {
+    return await makeApiRequest('/get-torrents', { limit: limit.toString(), page: page.toString() }, apiBaseUrl);
+}
+
+/**
+ * Get a list of torrents based on IMDb ID
+ * 
+ * NOTE:     
+ * For TV Shows provide the IMDb id of the show itself, it does not work
+ * when you provide an IMDb for individual episodes
+ * 
+ * @param imdbId            - IMDb ID
+ * @param apiBaseUrl        - If eztv domain changed or eztv is blocked in your country provide a proxy url here
+ * @returns `ApiResponseType`
+ */
+export async function getTorrentsByImdbId(imdbId: string, apiBaseUrl = 'https://eztv.wf/api/') {
+    return await makeApiRequest('/get-torrents', { imdb_id: imdbId }, apiBaseUrl);
+}
+
+/**
+ * Send a request to EZTV's API
+ * 
+ * @param path      
+ * @param params 
+ * @param apiBaseUrl 
+ * @returns `ApiResponseType`
+ */
+async function makeApiRequest(path: string, params: Record<string, string>, apiBaseUrl = 'https://eztv.wf/api/') {
+    try {
+        const request = await fetch(`${apiBaseUrl}/${path}?${new URLSearchParams(params)}`);
+        const json: ApiResponseType = await request.json();
+
+        return json;
+    } catch(e) {
+        if(e instanceof Error) {
+            throw new EztvCrawlerException(e.message);
+        }
+
+        throw new EztvCrawlerException('Could not fullfill request.');
+    }
+}
+
+/**
  * Transforms a <table> Element into a episode object
  * 
  * Note: in torrents, don't parse the `.download_2` class, it contains spam and malware in some cases
@@ -124,9 +201,9 @@ export async function search(query: string) {
 function transformToEpisode($: CheerioAPI, episode: Element) {
     return {
         showLink: $(episode).find('td:nth-child(1) a').attr('href'),
-        title: $(episode).find('td:nth-child(2)').text()?.replaceAll(/\n/g, ''),
-        magnet: $(episode).find('td:nth-child(3) .magnet').attr('href')?.replaceAll(/\n/g, ''),
-        torrent: $(episode).find('td:nth-child(3) .download_1').attr('href')?.replaceAll(/\n/g, ''),
+        title: $(episode).find('td:nth-child(2)').text()?.replace(/\n/g, ''),
+        magnet: $(episode).find('td:nth-child(3) .magnet').attr('href')?.replace(/\n/g, ''),
+        torrent: $(episode).find('td:nth-child(3) .download_1').attr('href')?.replace(/\n/g, ''),
         size: bytes($(episode).find('td:nth-child(4)').text()),
         released: $(episode).find('td:nth-child(5)').text(),
         seeds: parseInt($(episode).find('td:nth-child(6)').text()) || 0
