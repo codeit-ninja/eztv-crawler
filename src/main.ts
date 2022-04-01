@@ -162,8 +162,8 @@ export async function getTorrents(limit = 10, page = 1, apiBaseUrl = 'https://ez
  * @param apiBaseUrl        - If eztv domain changed or eztv is blocked in your country provide a proxy url here
  * @returns `ApiResponseType`
  */
-export async function getTorrentsByImdbId(imdbId: string, apiBaseUrl = 'https://eztv.wf/api/') {
-    return await makeApiRequest('/get-torrents', { imdb_id: imdbId }, apiBaseUrl);
+export async function getTorrentsByImdbId(imdbId: string, limit = 30, page = 1, apiBaseUrl = 'https://eztv.wf/api/') {
+    return await makeApiRequest('/get-torrents', { imdb_id: imdbId, limit: limit.toString(), page: page.toString() }, apiBaseUrl);
 }
 
 /**
