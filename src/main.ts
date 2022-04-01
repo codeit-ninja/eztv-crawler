@@ -175,6 +175,10 @@ export async function getTorrentsByImdbId(imdbId: string, apiBaseUrl = 'https://
  * @returns `ApiResponseType`
  */
 async function makeApiRequest(path: string, params: Record<string, string>, apiBaseUrl = 'https://eztv.wf/api/') {
+    if (params.imdb_id) {
+        params.imdb_id = params.imdb_id.replace(/\D+/, '');
+    }
+
     try {
         const request = await fetch(`${apiBaseUrl}/${path}?${new URLSearchParams(params)}`);
         const json: ApiResponseType = await request.json();
