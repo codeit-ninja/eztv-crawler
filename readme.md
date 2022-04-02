@@ -20,7 +20,7 @@ npm install eztv-crawler
 ### 🚩 getShows
 Usage
 ```typescript
-import { getShows } from 'eztv-scraper'
+import { getShows } from 'eztv-crawler'
 
 const shows = await getShows();
 ```
@@ -37,7 +37,7 @@ Response
 ### 🚩 getShow
 Usage
 ```typescript
-import { getShow } from 'eztv-scraper'
+import { getShow } from 'eztv-crawler'
 
 const show = await getShow(481);   // By ID (481 = Game of Thrones)
 //const show = await getShow('Game of thrones'); // or by name
@@ -66,7 +66,7 @@ Response
 ### 🚩 search
 Usage
 ```typescript
-import { search } from 'eztv-scraper'
+import { search } from 'eztv-crawler'
 
 const result = await search('game of thrones s01e01');
 ```
@@ -88,7 +88,7 @@ Response
 ### 🚩 getTorrents (API)
 Usage
 ```typescript
-import { getTorrents } from 'eztv-scraper'
+import { getTorrents } from 'eztv-crawler'
 
 const result = await getTorrents();
 ```
@@ -124,7 +124,7 @@ Response
 ### 🚩 getTorrentsByImdbId (API)
 Usage
 ```typescript
-import { getTorrents } from 'eztv-scraper'
+import { getTorrents } from 'eztv-crawler'
 
 const result = await getTorrentsByImdbId('tt6048596');
 ```
