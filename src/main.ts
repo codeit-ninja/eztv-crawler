@@ -54,7 +54,7 @@ export type ApiResponseType = {
  * @param url 
  * @returns `Crawler.CrawlerRequestResponse`
  */
-export async function crawl(url: string) {
+async function crawl(url: string) {
     const body = await fetch(url).then(async resp => resp.text());
     const $ = load(body);
 
