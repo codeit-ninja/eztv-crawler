@@ -20,3 +20,8 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
+
+# Jest files
+jest.config.js
+*.test.js
+*.test.ts
